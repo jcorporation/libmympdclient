@@ -50,60 +50,52 @@ mpd_send_getalbumart(struct mpd_connection *connection, const char *uri, const u
 	return mpd_send_s_u_command(connection, "albumart", uri, offset);
 }
 
-bool
-mpd_free_albumart(struct mpd_albumart * albumart) {
-        assert(albumart);
-        free(albumart->data);
-        free(albumart);
-        return true;
-}
-
 struct mpd_albumart *
-mpd_recv_albumart(struct mpd_connection *connection)
+mpd_recv_albumart(struct mpd_connection *connection, struct mpd_albumart *buffer)
 {
-        struct mpd_albumart *albumart = malloc(sizeof(struct mpd_albumart));
-        assert(albumart);
+        struct mpd_albumart *result = NULL;
 
         //size pair
 	struct mpd_pair *pair = mpd_recv_pair(connection);
 	if (pair == NULL) {
-	      free(albumart);
 	      return NULL;
         }
-        albumart->size = atoi(pair->value);
+        buffer->size = atoi(pair->value);
         mpd_return_pair(connection, pair);
 
         //binary pair
 	pair = mpd_recv_pair(connection);
 	if (pair == NULL) {
-	       free(albumart);
 	       return NULL;
         }
-        albumart->binary = atoi(pair->value);
+        buffer->data_length = atoi(pair->value);
         mpd_return_pair(connection, pair);
 
         //binary data
-        albumart->data = mpd_recv_binary(connection, albumart->binary);
-        if (albumart->data == NULL) {
-                free(albumart);
+        buffer->data_length = buffer->data_length < MPD_BINARY_CHUNK_SIZE ? buffer->data_length : MPD_BINARY_CHUNK_SIZE;
+        if (mpd_recv_binary(connection, buffer->data, buffer->data_length) != buffer->data_length) {
+                mpd_error_code(&connection->error, MPD_ERROR_STATE);
+                mpd_error_message(&connection->error,
+                                  "Error reading binary data");
                 return NULL;
         }
         
-	return albumart;
+        result = buffer;
+	return result;
 }
 
 struct mpd_albumart *
-mpd_run_getalbumart(struct mpd_connection *connection, const char *uri, const unsigned offset)
+mpd_run_getalbumart(struct mpd_connection *connection, const char *uri, const unsigned offset, struct mpd_albumart *buffer)
 {
 	if (!mpd_run_check(connection) ||
 	    !mpd_send_getalbumart(connection, uri, offset)) {
 		return NULL;
         }
         
-        struct mpd_albumart * albumart = mpd_recv_albumart(connection);
-        if (!mpd_response_finish(connection) && albumart != NULL) {
-                mpd_free_albumart(albumart);
+        struct mpd_albumart *result = mpd_recv_albumart(connection, buffer);
+        if (!mpd_response_finish(connection) || 
+            result->data_length == 0) {
                 return NULL;
         }
-	return albumart;
+	return result;
 }

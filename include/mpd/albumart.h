@@ -46,14 +46,17 @@
 
 struct mpd_connection;
 
+#define MPD_BINARY_CHUNK_SIZE 8192
+
 struct mpd_albumart {
-        /** the binary data */
-        char *data;
+        /** fixed size binary data buffer*/
+        unsigned char data[MPD_BINARY_CHUNK_SIZE];
 
         /** the size of the albumart */
         unsigned size;
-        /** bytes read */
-        unsigned binary;
+        
+        /** bytes in the data buffer*/
+        unsigned data_length;
 };
 
 
@@ -62,12 +65,12 @@ extern "C" {
 #endif
 
 /**
- * Sends the "getalbumart" command to MPD.  Call mpd_recv_pair() to
- * read response lines.  Use mpd_parse_fingerprint_type() to check
- * each pair's name; the pair's value then contains the actual
- * fingerprint.
+ * Sends the "getalbumart" command to MPD.  Call mpd_recv_albumart() to
+ * read response lines. 
  *
  * @param connection a valid and connected #mpd_connection
+ * @param uri the URI of the song
+ * @param offset to read from
  * @return true on success
  */
 bool
@@ -75,25 +78,32 @@ mpd_send_getalbumart(struct mpd_connection *connection,
                                    const char *uri, 
                                    const unsigned offset);
 
-bool
-mpd_free_albumart(struct mpd_albumart * albumart);
-
-mpd_malloc
+/**
+ * Receives the "getalbumart" response
+ *
+ * @param connection a valid and connected #mpd_connection
+ * @param buffer a allocated struct mpd_albumart
+ * @return a pointer to the struct mpd_albumart on success, otherwise NULL
+ */
 struct mpd_albumart *
-mpd_recv_albumart(struct mpd_connection *connection);
+mpd_recv_albumart(struct mpd_connection *connection, struct mpd_albumart *buffer);
 
 /**
  * Shortcut for mpd_send_getalbumart(), mpd_recv_albumart() and
  * mpd_response_finish().
  *
  * @param connection a valid and connected #mpd_connection
- * @return a pointer to the struct mpd_albumart on success or NULL on error
+ * @param uri the URI of the song
+ * @param offset to read from
+ * @param buffer a allocated struct mpd_albumart
+ * @return a pointer to the struct mpd_albumart on success,
+ *         NULL if a error has occured or response is finished
  */
-mpd_malloc
 struct mpd_albumart *
 mpd_run_getalbumart(struct mpd_connection *connection,
 				   const char *uri,
-				   const unsigned offset);
+				   const unsigned offset,
+				   struct mpd_albumart *buffer);
 
 #ifdef __cplusplus
 }

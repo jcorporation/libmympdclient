@@ -285,27 +285,22 @@ int main(int argc, char ** argv) {
 			return handle_error(conn);
 
 		printf("%s\n", fingerprint);
-	} else if (argc == 4 && strcmp(argv[1], "albumart") == 0) {
-		int offset = atoi(argv[3]);
-		FILE *fp;
-		fp = fopen("/tmp/test", "w");
+	} else if (argc == 3 && strcmp(argv[1], "albumart") == 0) {
+		unsigned offset = 0;
+		unsigned size = 0;
+		FILE *fp = fopen("/tmp/test", "w");
 		if (fp == NULL) {
 			return 1;
 		}
-		int size = 0;
-		while (true) {
-			struct mpd_albumart *albumart = mpd_run_getalbumart(conn, argv[2], offset);
-			if (albumart == NULL)
-				return handle_error(conn);
-			fwrite(albumart->data, 1, albumart->binary, fp);
-			offset += albumart->binary;
+		struct mpd_albumart buffer;
+		struct mpd_albumart *albumart;
+		while ((albumart = mpd_run_getalbumart(conn, argv[2], offset, &buffer)) != NULL) {
+			fwrite(albumart->data, 1, albumart->data_length, fp);
+			offset += albumart->data_length;
 			size = albumart->size;
-			mpd_free_albumart(albumart);
-			if (size == offset) 
-				break;
 		}
 		fclose(fp);
-		printf("Wrote file: /tmp/test\nRetrieved: %d bytes\n", offset - atoi(argv[3]));
+		printf("Wrote file: /tmp/test, size: %u bytes, retrieved: %u bytes\n", size, offset);
 	}
 
 	mpd_connection_free(conn);

@@ -13,6 +13,7 @@ global:
 	mpd_async_send_command_v;
 	mpd_async_send_command;
 	mpd_async_recv_line;
+	mpd_async_recv_binary;
 
 	/* mpd/capabilities.h */
 	mpd_send_allowed_commands;
@@ -295,6 +296,7 @@ global:
 	mpd_recv_pair_named;
 	mpd_return_pair;
 	mpd_enqueue_pair;
+	mpd_recv_binary;
 
 	/* mpd/response.h */
 	mpd_response_finish;
@@ -414,7 +416,6 @@ global:
 	mpd_send_getalbumart;
 	mpd_recv_albumart;
 	mpd_run_getalbumart;
-	mpd_free_albumart;
 
 	/* mpd/settings.h */
 	mpd_settings_new;
