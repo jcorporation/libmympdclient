@@ -294,7 +294,7 @@ int main(int argc, char ** argv) {
 		}
 		struct mpd_albumart buffer;
 		struct mpd_albumart *albumart;
-		while ((albumart = mpd_run_getalbumart(conn, argv[2], offset, &buffer)) != NULL) {
+		while ((albumart = mpd_run_albumart(conn, argv[2], offset, &buffer)) != NULL) {
 			fwrite(albumart->data, 1, albumart->data_length, fp);
 			offset += albumart->data_length;
 			size = albumart->size;

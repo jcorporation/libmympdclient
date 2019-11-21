@@ -413,9 +413,9 @@ global:
 	mpd_run_getfingerprint_chromaprint;
 
 	/* mpd/albumart.h */
-	mpd_send_getalbumart;
+	mpd_send_albumart;
 	mpd_recv_albumart;
-	mpd_run_getalbumart;
+	mpd_run_albumart;
 
 	/* mpd/settings.h */
 	mpd_settings_new;

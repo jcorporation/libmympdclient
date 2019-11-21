@@ -26,7 +26,6 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <mpd/binary.h>
 #include "sync.h"
 #include "socket.h"
 #include "binary.h"

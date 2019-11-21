@@ -74,7 +74,7 @@ extern "C" {
  * @return true on success
  */
 bool
-mpd_send_getalbumart(struct mpd_connection *connection, 
+mpd_send_albumart(struct mpd_connection *connection, 
                                    const char *uri, 
                                    const unsigned offset);
 
@@ -100,7 +100,7 @@ mpd_recv_albumart(struct mpd_connection *connection, struct mpd_albumart *buffer
  *         NULL if a error has occured or response is finished
  */
 struct mpd_albumart *
-mpd_run_getalbumart(struct mpd_connection *connection,
+mpd_run_albumart(struct mpd_connection *connection,
 				   const char *uri,
 				   const unsigned offset,
 				   struct mpd_albumart *buffer);
