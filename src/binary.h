@@ -44,7 +44,6 @@
 struct mpd_binary {
         /** the binary data */
         void *data;
-
         /** the size of the binary data */
         size_t size;
 };

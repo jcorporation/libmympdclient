@@ -26,7 +26,6 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include "iasync.h"
 #include "buffer.h"
 #include "ierror.h"
