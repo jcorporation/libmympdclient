@@ -1,6 +1,16 @@
 libmpdclient
 ============
 
+This is a patched version of libmpdclient for usage in myMPD, based on
+libmpdclient master branch.
+
+Additional features:
+
+- "Grouping", "Work" and "Conductor" tags
+- api for binary responses
+- "albumart" command support
+- "readpicture" command support (coming soon)
+
 libmpdclient is a C library which implements the `Music Player Daemon
 <http://www.musicpd.org/>`__ protocol.
 

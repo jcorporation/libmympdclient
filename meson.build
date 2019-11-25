@@ -149,6 +149,7 @@ libmpdclient = library('mpdclient',
   'src/settings.c',
   'src/message.c',
   'src/cmessage.c',
+  'src/albumart.c',
   link_depends: [
     'libmpdclient.ld'
   ],
