@@ -431,6 +431,11 @@ global:
 	mpd_run_switch_partition;
 	mpd_send_listpartitions;
 
+	/*mpd/albumart.h */
+	mpd_send_albumart;
+	mpd_recv_albumart;
+	mpd_run_albumart;
+
 	/* mpd/settings.h */
 	mpd_settings_new;
 	mpd_settings_free;
