@@ -419,7 +419,7 @@ int main(int argc, char ** argv) {
 			return 1;
 		}
 		struct mpd_albumart buffer;
-		while ((mpd_run_albumart(conn, argv[2], offset, &buffer)) != false) {
+		while (mpd_run_albumart(conn, argv[2], offset, &buffer) == true) {
 			fwrite(buffer.data, 1, buffer.data_length, fp);
 			offset += buffer.data_length;
 			size = buffer.size;
