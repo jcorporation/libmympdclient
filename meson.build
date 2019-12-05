@@ -214,6 +214,7 @@ install_headers(
   'include/mpd/settings.h',
   'include/mpd/message.h',
   'include/mpd/albumart.h',
+  'include/mpd/libmympdclient_version.h',
   join_paths(meson.build_root(), 'version.h'),
   subdir: 'mpd')
 
