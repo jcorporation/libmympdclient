@@ -212,6 +212,7 @@ install_headers(
   'include/mpd/sticker.h',
   'include/mpd/settings.h',
   'include/mpd/message.h',
+  'include/mpd/libmympdclient_version.h',
   join_paths(meson.build_root(), 'version.h'),
   subdir: 'mpd')
 
