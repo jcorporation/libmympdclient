@@ -77,6 +77,7 @@
 #include "status.h"
 #include "sticker.h"
 #include "version.h"
+#include "readpicture.h"
 
 // IWYU pragma: end_exports
 

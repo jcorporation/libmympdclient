@@ -153,6 +153,7 @@ libmpdclient = library('mpdclient',
   'src/cmessage.c',
   'src/partition.c',
   'src/cpartition.c',
+  'src/readpicture.c',
   link_depends: [
     'libmpdclient.ld'
   ],
@@ -212,6 +213,7 @@ install_headers(
   'include/mpd/sticker.h',
   'include/mpd/settings.h',
   'include/mpd/message.h',
+  'include/mpd/readpicture.h',
   join_paths(meson.build_root(), 'version.h'),
   subdir: 'mpd')
 

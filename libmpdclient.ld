@@ -431,6 +431,12 @@ global:
 	mpd_run_switch_partition;
 	mpd_send_listpartitions;
 
+	/* mpd/readpicture.h */
+	mpd_free_readpicture;
+	mpd_send_readpicture;
+	mpd_recv_readpicture;
+	mpd_run_readpicture;
+
 	/* mpd/settings.h */
 	mpd_settings_new;
 	mpd_settings_free;
