@@ -190,6 +190,7 @@ install_headers(
   'include/mpd/error.h',
   'include/mpd/fingerprint.h',
   'include/mpd/idle.h',
+  'include/mpd/libmympdclient_version.h',
   'include/mpd/list.h',
   'include/mpd/mixer.h',
   'include/mpd/mount.h',

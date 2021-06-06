@@ -58,6 +58,7 @@
 #include "entity.h"
 #include "fingerprint.h"
 #include "idle.h"
+#include "libmympdclient_version.h"
 #include "list.h"
 #include "message.h"
 #include "mixer.h"
