@@ -25,6 +25,8 @@ conf.set('HAVE_STRNDUP', cc.has_function('strndup', prefix: '#define _GNU_SOURCE
 conf.set('HAVE_SETLOCALE', cc.has_function('setlocale', prefix: '#include <locale.h>'))
 conf.set('HAVE_USELOCALE', cc.has_function('uselocale', prefix: '#define _GNU_SOURCE\n#include <locale.h>'))
 
+conf.set('BUFFER_SIZE', get_option('buffer_size'))
+
 platform_deps = []
 if host_machine.system() == 'haiku'
   platform_deps = [cc.find_library('network')]
