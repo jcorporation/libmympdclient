@@ -143,3 +143,11 @@ mpd_send_stickernames(struct mpd_connection *connection)
 
 	return mpd_send_command(connection, "stickernames", NULL);
 }
+
+bool
+mpd_send_stickernamestypes(struct mpd_connection *connection, const char *type)
+{
+	assert(connection != NULL);
+
+	return mpd_send_command(connection, "stickernamestypes", type, NULL);
+}
