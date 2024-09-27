@@ -224,6 +224,7 @@ bool
 mpd_send_stickernames(struct mpd_connection *connection);
 
 /**
+<<<<<<< HEAD
  * Obtains an uniq list of all sticker types. Call
  * mpd_recv_pair() to receive each response item.
  *
@@ -238,6 +239,12 @@ mpd_send_stickertypes(struct mpd_connection *connection);
  * Constraints may be specified.
  * Send the search command with mpd_sticker_search_commit(), and read the
  * response items with mpd_recv_sticker().
+=======
+ * Search for stickers in the database.
+ * Constraints may be specified with mpd_search_add_tag_constraint().
+ * Send the search command with mpd_search_commit(), and read the
+ * response items with mpd_recv_song().
+>>>>>>> playlist_search
  *
  * @param connection the connection to MPD
  * @param type the object type, e.g. "song"
@@ -296,7 +303,12 @@ mpd_sticker_search_add_window(struct mpd_connection *connection,
 		              unsigned start, unsigned end);
 
 /**
+<<<<<<< HEAD
  * Starts the real search.
+=======
+ * Starts the real search with constraints added with
+ * mpd_sticker_search_add_constraint().
+>>>>>>> playlist_search
  *
  * @param connection the connection to MPD
  * @return true on success, false on error
